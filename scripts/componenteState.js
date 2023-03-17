@@ -23,7 +23,7 @@ template.data = {
 };
 //RENDER UI
 const render = () => {
-  console.log("Estado global", state);
+  console.log("Estado global", state);            
   console.log("Estado local", template.data);
 
   const $list = d.getElementById("todo-list");
