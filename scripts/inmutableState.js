@@ -33,6 +33,8 @@ const setState = (obj) => {
   }
   render();
 };
+//OBTENEMOS UNA COPIA IMNUTABLE
+const getState = () => JSON.parse(JSON.stringify(state));
 d.addEventListener("DOMContentLoaded", render);
 
 //ESTABLECIENDO VALORES POR DEFECTO AL STATE
@@ -42,9 +44,10 @@ setState({
 });
 
 //EN EL ESTADO MUTABLE PERMITIMOS LA MODIFICACION DEL ESTADO DIRECTAMENTE CREANDO UNA COPIA DEL OBJETO Y AGREGANDO OTRO ELEMETO
-const items = state.todoList;
-items.push("Tarea 4");
-console.log("Estado mutable", state);
+const items = getState();
+// items.push("Tarea 4");
+items.todoList.push("Tarea 4");
+console.log("Estado Inmutable", state);
 
 d.addEventListener("submit", (e) => {
   if (!e.target.matches("#todo-form")) return false;
@@ -53,9 +56,11 @@ d.addEventListener("submit", (e) => {
   const $item = d.getElementById("todo-item");
   if (!$item) return;
 
-  //Actualizar state y UI
-  state.todoList.push($item.value);
-  render();
+  //ACTUALIZAR STATE DE FORMA REACTIVA
+  const lastState = getState();
+  lastState.todoList.push($item.value);
+  setState({ todoList: data.todoList });
+
   //limpiar el input
   $item.value = "";
   $item.focus();
