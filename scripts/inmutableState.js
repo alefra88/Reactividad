@@ -59,7 +59,7 @@ d.addEventListener("submit", (e) => {
   //ACTUALIZAR STATE DE FORMA REACTIVA
   const lastState = getState();
   lastState.todoList.push($item.value);
-  setState({ todoList: data.todoList });
+  setState({ todoList: lastState.todoList });
 
   //limpiar el input
   $item.value = "";
